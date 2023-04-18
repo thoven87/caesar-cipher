@@ -38,5 +38,4 @@ jobs:
 
       - name: Build
         run: |
-          cd phaser
           cargo build --release
