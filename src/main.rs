@@ -7,15 +7,15 @@ fn encrypt(text: &str, shift: u32) -> String {
         let x = c as u32;
 
         if x == 32 {
-            acc.push_str(" ");
+            acc.push(' ');
             acc
         } else {
             // Uppercase
-            if x >= 65 && x <= 90 {
+            if (65..=90).contains(&x) {
                 let ch = (x - 65 + shift) % 26 + 65;
                 acc.push(from_u32(ch).unwrap());
                 // Lowercase
-            } else if x >= 97 && x <= 122 {
+            } else if (97..=122).contains(&x) {
                 let ch = (x - 97 + shift) % 26 + 97;
                 acc.push(from_u32(ch).unwrap());
             }
