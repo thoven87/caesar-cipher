@@ -1,3 +1,5 @@
+use std::io;
+
 const RADIX: u32 = 10;
 
 fn encrypt(text: &str, shift: u32) -> String {
@@ -25,15 +27,31 @@ fn encrypt(text: &str, shift: u32) -> String {
 }
 
 fn decrypt(text: &str, shift: u32) -> String {
-    println!("decrypt {text}");
     encrypt(text, (26 - shift) % 26)
 }
 
 fn main() {
-    let text = "Hello World!";
-    let caesar = encrypt(text, RADIX);
-    let reversed = decrypt(&caesar, RADIX);
-    println!("Caesar {caesar} - decrypted {reversed}");
+    println!("enter e: TEXT_TO_BE_ENCCRYPTED to encrypt.");
+    println!("enter d: TEXT_TO_BE_DECRYPTED to decrypt.");
+    loop {
+        let mut text: String = String::new();
+
+        io::stdin().read_line(&mut text).expect("expected an input");
+
+        let text: &str = text.trim();
+
+        match text {
+            text if text.starts_with("e:") => {
+                let data = encrypt(&text.strip_prefix("e: ").unwrap(), RADIX);
+                println!("encrypyted text is: {data}")
+            }
+            text if text.starts_with("d:") => {
+                let data = decrypt(&text.strip_prefix("d: ").unwrap(), RADIX);
+                println!("decrypyted text is: {data}")
+            }
+            _ => println!("Invalid option."),
+        }
+    }
 }
 
 #[cfg(test)]
