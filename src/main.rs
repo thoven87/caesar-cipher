@@ -42,11 +42,11 @@ fn main() {
 
         match text {
             text if text.starts_with("e:") => {
-                let data = encrypt(&text.strip_prefix("e: ").unwrap(), RADIX);
+                let data = encrypt(text.strip_prefix("e: ").unwrap(), RADIX);
                 println!("encrypyted text is: {data}")
             }
             text if text.starts_with("d:") => {
-                let data = decrypt(&text.strip_prefix("d: ").unwrap(), RADIX);
+                let data = decrypt(text.strip_prefix("d: ").unwrap(), RADIX);
                 println!("decrypyted text is: {data}")
             }
             _ => println!("Invalid option."),
